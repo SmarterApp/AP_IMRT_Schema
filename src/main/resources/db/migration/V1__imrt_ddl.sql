@@ -58,9 +58,7 @@ CREATE TABLE item_log (
 /* Link Assessment items and stimulii */
 CREATE TABLE stim_link (
   item_key      INT         NOT NULL,
-  item_id       INT         NOT NULL,
   item_key_stim INT         NOT NULL,
-  item_id_stim  INT         NOT NULL,
   created_at    TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   updated_at    TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   updated_by    VARCHAR     NOT NULL,
