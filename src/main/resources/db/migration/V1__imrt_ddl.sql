@@ -1,8 +1,8 @@
 /* Primary table containing all types of items and the json data from IAT */
 CREATE TABLE item (
   key             SERIAL PRIMARY KEY, -- Primary key for items, auto-incrementing (change serial to AUTO_INCREMENT for mySQL)
-  id              VARCHAR(9)  NOT NULL, -- Item ID as specified by IAT
-  subject         VARCHAR(20) NOT NULL,
+  id              VARCHAR     NOT NULL, -- Item ID from the Item Bank
+  subject         VARCHAR     NOT NULL,
   grade           VARCHAR     NOT NULL,
   workflow_status VARCHAR     NOT NULL,
   item_type       VARCHAR     NOT NULL,

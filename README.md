@@ -28,6 +28,7 @@ SQL files should conform to the following conventions:
 * Timestamp field names should end is _at, for example 'created_at'
 * Timestamp columns should use the timestamptz type
 * Columns denoting authorship should end in _by, for example 'updated_by'
+* Each table should contain created_at, updated_at, and updated_by audit fields.
 
 ## Migrations
 
