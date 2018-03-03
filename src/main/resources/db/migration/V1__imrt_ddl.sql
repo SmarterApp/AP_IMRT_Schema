@@ -77,7 +77,7 @@ CREATE TABLE project_lock (
   PRIMARY KEY (project_id)
 );
 
-/* flywayClean deletes all user privledges, so we will set them here.
+/* flywayClean deletes all user privleges, so we will set them here.
    Assumes that that imrt-ingest and imrt-search users have already been created in the database */
 GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON ALL TABLES in schema public to "imrt-ingest";
 GRANT SELECT, UPDATE ON ALL SEQUENCES in schema public to "imrt-ingest";
