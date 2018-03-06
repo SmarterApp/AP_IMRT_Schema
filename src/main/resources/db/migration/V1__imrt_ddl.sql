@@ -8,7 +8,7 @@ CREATE TABLE item (
   item_type       VARCHAR     NOT NULL,
   dok             VARCHAR     NOT NULL,
   item_created_by VARCHAR     NOT NULL,
-  item_created_at VARCHAR     NOT NULL,
+  item_created_at TIMESTAMPTZ NOT NULL,
   item_json       JSON        NOT NULL,
   created_at      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   updated_at      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
@@ -66,3 +66,20 @@ CREATE TABLE stim_link (
   FOREIGN KEY (item_key_stim) REFERENCES item (key),
   PRIMARY KEY (item_key, item_key_stim)
 );
+
+/* Project Locking */
+CREATE TABLE project_lock (
+  project_id INT         NOT NULL,
+  locked_at  TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
+  updated_by VARCHAR     NOT NULL,
+  PRIMARY KEY (project_id)
+);
+
+/* flywayClean deletes all user privileges, so we will set them here.
+   Assumes that that imrt-ingest and imrt-search users have already been created in the database */
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON ALL TABLES in schema public to "imrt_ingest";
+GRANT SELECT, UPDATE ON ALL SEQUENCES in schema public to "imrt_ingest";
+GRANT SELECT ON ALL TABLES in schema public to "imrt_search";
+GRANT SELECT ON ALL SEQUENCES in schema public to "imrt_search";
