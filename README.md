@@ -1,11 +1,13 @@
 # AP_IMRT_Schema
-Contains SQL schema migrations to support the IMRT application(s)
+Contains SQL schema migrations to support the IMRT application(s). Uses the [flyway gradle plugin](https://flywaydb.org/documentation/gradle/).
 
-Uses the flyway gradle plugin: https://flywaydb.org/documentation/gradle/
+Assumes that the database itself has already been created and configured.  At a minimum you will need the following users created:
 
-Assumes that the database itself has already been created and configured
+* imrt_ingest
+* imrt_search
+* test
 
-To use, configuir the following properties, either via environment variables, command line arguments, are gradle.properties:
+To use, configure the following properties, either via environment variables, command line arguments, are gradle.properties:
 <pre>
 flyway.user=<user>
 flyway.password=<password>
