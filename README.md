@@ -3,9 +3,8 @@ Contains SQL schema migrations to support the IMRT application(s). Uses the [fly
 
 Assumes that the database itself has already been created and configured.  At a minimum you will need the following users created:
 
-* imrt_ingest
-* imrt_search
-* test
+* `imrt_ingest`
+* `imrt_search`
 
 To use, configure the following properties, either via environment variables, command line arguments, are gradle.properties:
 <pre>
