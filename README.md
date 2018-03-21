@@ -20,6 +20,15 @@ Then run the flyway tasks, for example:
 ./gradlew flywayMigrate
 </pre>
 
+## Executable Jar
+In addition to using the Gradle plugin the project creates an executable jar that can be used to run migrations.  You will need to pass in the necessary JDBC url and user credental information.
+
+An example command to run the jar:
+
+```
+ java -jar build/libs/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username:"<user>" --spring.datasource.password="<password>"
+```
+
 ## SQL Conventions
 
 SQL files should conform to the following conventions:
