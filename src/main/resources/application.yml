@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url:
+
+flyway:
+  enabled: true
