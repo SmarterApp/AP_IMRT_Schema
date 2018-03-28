@@ -6,11 +6,39 @@ Assumes that the database itself has already been created and configured.  At a 
 * `imrt_ingest`
 * `imrt_search`
 
+## Create `imrt_ingest` and `imrt_search` Users
+The following SQL can be used to create the `imrt_ingest` and `imrt_search` users with the correct permissions:
+
+```sql
+CREATE USER imrt_ingest WITH PASSWORD '[choose a password]';
+CREATE USER imrt_search WITH PASSWORD '[choose a password]';
+
+REVOKE CONNECT ON DATABASE imrt FROM PUBLIC;
+
+GRANT CONNECT ON DATABASE imrt TO imrt_ingest;
+GRANT CONNECT ON DATABASE imrt TO imrt_search;
+
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO imrt_ingest;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO imrt_search;
+
+ALTER DEFAULT PRIVILEGES
+    FOR ROLE imrt_ingest
+    IN SCHEMA public
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO imrt_ingest;
+
+ALTER DEFAULT PRIVILEGES
+    FOR ROLE imrt_search
+    IN SCHEMA public
+    GRANT SELECT ON TABLES To imrt_search;
+```
+
 To use, configure the following properties, either via environment variables, command line arguments, are gradle.properties:
 <pre>
 flyway.user=<user>
 flyway.password=<password>
-flyway.url=<url> 
+flyway.url=<url>
 Sample URL for local database named imrt: jdbc:postgresql://localhost:5432/imrt
 </pre>
 
@@ -49,10 +77,10 @@ SQL files should conform to the following conventions:
 ## Migrations
 
 * Migrations scripts should be added to the directory src/main/resources/db/migration
-* Migration scripts should be named according to the flyway naming conventions definted here: 
+* Migration scripts should be named according to the flyway naming conventions definted here:
 https://flywaydb.org/documentation/migrations#naming
 * The "Description" component of the file name should end with either '_ddl' (data definition language)
- or '_dml' (data manipulation languge), for example V1_imrt_ddl.sql  
+ or '_dml' (data manipulation languge), for example V1_imrt_ddl.sql
 
 
 
