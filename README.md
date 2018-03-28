@@ -50,15 +50,26 @@ REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO imrt_ingest;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO imrt_search;
 
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO imrt_ingest;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO imrt_search;
+
 ALTER DEFAULT PRIVILEGES
     FOR ROLE imrt_ingest
     IN SCHEMA public
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO imrt_ingest;
 
 ALTER DEFAULT PRIVILEGES
+    IN SCHEMA public
+    GRANT USAGE, SELECT ON SEQUENCES TO imrt_ingest;
+
+ALTER DEFAULT PRIVILEGES
     FOR ROLE imrt_search
     IN SCHEMA public
     GRANT SELECT ON TABLES To imrt_search;
+
+ALTER DEFAULT PRIVILEGES
+    IN SCHEMA public
+    GRANT SELECT ON SEQUENCES TO imrt_search;
 ```
 
 ## Create the `test` User For the `test` Database
@@ -67,17 +78,20 @@ to run integration tests).  Unlike the `imrt_ingest` and `imrt_search` users, th
 to create/modify the schema and conduct the integration tests.
 
 ```sql
-CREATE USER test WITH PASSWORD 'password123';
-DROP USER test;
+CREATE USER test WITH PASSWORD '[choose a password]';
+
 REVOKE CONNECT ON DATABASE test TO PUBLIC;
 
-CREATE USER test WITH PASSWORD 'password123';
-GRANT ALL ON DATABASE test TO test;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO test;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO test;
 
 ALTER DEFAULT PRIVILEGES
     FOR ROLE test
     IN SCHEMA public
     GRANT ALL ON TABLES TO test;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+    GRANT USAGE, SELECT ON SEQUENCES TO test;
 ```
 
 ## Run Database Migrations to Create Database Objects
