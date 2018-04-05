@@ -40,7 +40,6 @@ The following SQL can be used to create the `imrt_ingest` and `imrt_search` user
 CREATE USER imrt_ingest WITH PASSWORD '[choose a password]';
 CREATE USER imrt_search WITH PASSWORD '[choose a password]';
 
-GRANT CONNECT ON DATABASE imrt TO imrt_admin;
 GRANT CONNECT ON DATABASE imrt TO imrt_ingest;
 GRANT CONNECT ON DATABASE imrt TO imrt_search;
 
