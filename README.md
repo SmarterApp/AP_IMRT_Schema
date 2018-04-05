@@ -40,23 +40,32 @@ The following SQL can be used to create the `imrt_ingest` and `imrt_search` user
 CREATE USER imrt_ingest WITH PASSWORD '[choose a password]';
 CREATE USER imrt_search WITH PASSWORD '[choose a password]';
 
-REVOKE CONNECT ON DATABASE imrt FROM PUBLIC;
-
 GRANT CONNECT ON DATABASE imrt TO imrt_ingest;
 GRANT CONNECT ON DATABASE imrt TO imrt_search;
 
 REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
 
+GRANT ALL ON ALL TABLES IN SCHEMA public TO imrt_admin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO imrt_ingest;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO imrt_search;
 
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO imrt_admin;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO imrt_ingest;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO imrt_search;
+
+ALTER DEFAULT PRIVILEGES
+    FOR ROLE imrt_admin
+    IN SCHEMA public
+    GRANT ALL ON TABLES TO imrt_admin;
 
 ALTER DEFAULT PRIVILEGES
     FOR ROLE imrt_ingest
     IN SCHEMA public
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO imrt_ingest;
+
+ALTER DEFAULT PRIVILEGES
+    IN SCHEMA public
+    GRANT USAGE, SELECT ON SEQUENCES TO imrt_admin;
 
 ALTER DEFAULT PRIVILEGES
     IN SCHEMA public
@@ -79,8 +88,6 @@ to create/modify the schema and conduct the integration tests.
 
 ```sql
 CREATE USER test WITH PASSWORD '[choose a password]';
-
-REVOKE CONNECT ON DATABASE test TO PUBLIC;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO test;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO test;
