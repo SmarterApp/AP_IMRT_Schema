@@ -3,4 +3,4 @@
 *
 ******************************************************************************/
 
-ALTER TABLE item ADD CONSTRAINT constraint_name UNIQUE (id);
+ALTER TABLE item ADD CONSTRAINT unique_id_constraint UNIQUE (id);
