@@ -133,7 +133,7 @@ gradle build -i
 An example command to run the jar against the `imrt` database: (in the root of the project):
 
 ```
- java -jar build/libs/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username:"<user>" --spring.datasource.password="<password>"
+ java -jar build/libs/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username="<user>" --spring.datasource.password="<password>"
 ```
 
 ## SQL Conventions
