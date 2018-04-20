@@ -134,6 +134,40 @@ An example command to run the jar against the `imrt` database: (in the root of t
  java -jar build/libs/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username="<user>" --spring.datasource.password="<password>"
 ```
 
+### Schema Verification
+Use the following steps to verify the `imrt` schema has been created:
+
+* Connect to the `imrt` database on the server and run the `\dt` command to view the tables in `imrt`.  An example is shown
+below:
+
+```
+psql -h [cluster endpoint host] -U imrt_admin imrt
+Password for user imrt_admin:
+psql (10.3, server 9.6.6)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+imrt=> \dt
+                     List of relations
+ Schema |             Name             | Type  |   Owner
+--------+------------------------------+-------+------------
+ public | batch_job_execution          | table | imrt_admin
+ public | batch_job_execution_context  | table | imrt_admin
+ public | batch_job_execution_params   | table | imrt_admin
+ public | batch_job_instance           | table | imrt_admin
+ public | batch_step_execution         | table | imrt_admin
+ public | batch_step_execution_context | table | imrt_admin
+ public | flyway_schema_history        | table | imrt_admin
+ public | item                         | table | imrt_admin
+ public | item_git                     | table | imrt_admin
+ public | item_log                     | table | imrt_admin
+ public | project_lock                 | table | imrt_admin
+ public | stim_link                    | table | imrt_admin
+(12 rows)
+
+imrt=> \q
+```
+
 ## SQL Conventions
 
 SQL files should conform to the following conventions:
