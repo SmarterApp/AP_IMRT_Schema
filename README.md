@@ -135,13 +135,10 @@ An example command to run the jar against the `imrt` database: (in the root of t
 ```
 
 ### Schema Verification
-Use the following steps to verify the `imrt` schema has been created:
-
-* Connect to the `imrt` database on the server and run the `\dt` command to view the tables in `imrt`.  An example is shown
-below:
+To verify the `imrt` schema has been created, connect to the `imrt` database on the server and run the `\dt` command to view the tables in `imrt`.  An example is shown below (be sure to substitute `imrt-db.example.com` with the appropriate host name):
 
 ```
-psql -h [cluster endpoint host] -U imrt_admin imrt
+psql -h imrt-db.example.com -U imrt_admin imrt
 Password for user imrt_admin:
 psql (10.3, server 9.6.6)
 SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
