@@ -37,8 +37,8 @@ postgres=# \q
 The following SQL can be used to create the `imrt_ingest` and `imrt_search` users in the `imrt` database with the correct permissions:
 
 ```sql
-CREATE USER imrt_ingest WITH PASSWORD '[choose a password]';
-CREATE USER imrt_search WITH PASSWORD '[choose a password]';
+CREATE ROLE imrt_ingest LOGIN PASSWORD '[choose a password]';
+CREATE ROLE imrt_search LOGIN PASSWORD '[choose a password]';
 
 GRANT CONNECT ON DATABASE imrt TO imrt_ingest;
 GRANT CONNECT ON DATABASE imrt TO imrt_search;
