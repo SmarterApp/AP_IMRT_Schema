@@ -43,8 +43,6 @@ CREATE ROLE imrt_search LOGIN PASSWORD '[choose a password]';
 GRANT CONNECT ON DATABASE imrt TO imrt_ingest;
 GRANT CONNECT ON DATABASE imrt TO imrt_search;
 
-REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
-
 GRANT ALL ON ALL TABLES IN SCHEMA public TO imrt_admin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO imrt_ingest;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO imrt_search;
@@ -80,6 +78,8 @@ ALTER DEFAULT PRIVILEGES
 ```
 
 ## Create the `test` User For the `test` Database
+> **NOTE:** This step is only required for setting up a new developer's workstation or a build server.  For system deployment (e.g. deploying IMRT to a development or production environment), this step can be skipped.  There is no need to create a `test` database when deploying to an environment.
+
 The following SQL can be used to create the `test` user for the `test` database (which is used by the Gradle build process
 to run integration tests).  Unlike the `imrt_ingest` and `imrt_search` users, the `test` user will have sufficient privileges
 to create/modify the schema and conduct the integration tests.
