@@ -3,10 +3,9 @@ CREATE TABLE item_attachment (
   item_key        INT NOT NULL REFERENCES item,
   file_name       VARCHAR NOT NULL,
   file_type       VARCHAR NOT NULL,
-  uploaded_at     TIMESTAMPTZ NOT NULL,
+  uploaded_at     TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   created_at      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   updated_at      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-  uploaded_date   TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
   updated_by      VARCHAR     NOT NULL
 );
 CREATE INDEX ix_item_attachment_key_file_type ON item_attachment(key, file_type);
