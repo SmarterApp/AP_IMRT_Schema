@@ -11,4 +11,4 @@ UPDATE
 SET
 	sight_tts_provided = item_json->'textToSpeech'->>'isSightTTSProvided',
 	visual_tts_provided = item_json->'textToSpeech'->>'isVisualTTSProvided',
-	visual_tts_required = item_json->'textToSpeech'->>'isVisualTTSRequired'
+	visual_tts_required = item_json->'textToSpeech'->>'isVisualTTSRequired';
