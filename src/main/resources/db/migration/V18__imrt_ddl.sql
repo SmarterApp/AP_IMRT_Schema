@@ -14,7 +14,7 @@ INSERT INTO item_attachment_temp (item_key, file_name, file_type, uploaded_at, c
     item_key,
     file_name,
     file_type,
-    uploaded_at,
+    MIN(uploaded_at),
     MIN(updated_at),
     MIN(created_at),
     updated_by
@@ -24,9 +24,7 @@ INSERT INTO item_attachment_temp (item_key, file_name, file_type, uploaded_at, c
     item_key,
     file_name,
     file_type,
-    uploaded_at,
     updated_by;
-
 
 ALTER TABLE item_attachment DROP CONSTRAINT item_attachment_pkey;
 ALTER TABLE item_attachment DROP COLUMN key;
