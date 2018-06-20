@@ -5,26 +5,38 @@ CREATE TEMPORARY TABLE item_attachment_temp (
   uploaded_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by character varying NOT NULL
+  updated_by character varying NOT NULL DEFAULT ''
 );
 
--- Get the first item_attachment record that was created
-INSERT INTO item_attachment_temp (item_key, file_name, file_type, uploaded_at, created_at, updated_at, updated_by)
+-- Get the most recent item_attachment record that was created
+INSERT INTO item_attachment_temp (item_key, file_name, file_type, uploaded_at, created_at, updated_at)
   SELECT
     item_key,
     file_name,
     file_type,
-    MIN(uploaded_at),
-    MIN(updated_at),
-    MIN(created_at),
-    updated_by
+    MAX(uploaded_at),
+    MAX(created_at),
+    MAX(updated_at)
   FROM
     item_attachment
   GROUP BY
     item_key,
     file_name,
-    file_type,
-    updated_by;
+    file_type;
+
+-- Set the user name to reflect the correct user
+UPDATE
+	item_attachment_temp tmp
+SET
+	updated_by = att.updated_by
+FROM
+	item_attachment att
+	WHERE att.item_key = tmp.item_key
+	AND att.file_name = tmp.file_name
+	AND att.file_type = tmp.file_type
+	AND att.uploaded_at = tmp.uploaded_at
+	AND att.created_at = tmp.created_at
+	AND att.updated_at = tmp.updated_at;
 
 ALTER TABLE item_attachment DROP CONSTRAINT item_attachment_pkey;
 ALTER TABLE item_attachment DROP COLUMN key;
