@@ -2,7 +2,7 @@
 * Create the item validation error table
 ********************************************************************/
 
-CREATE TABLE validation_results (
+CREATE TABLE validation_result (
   key SERIAL PRIMARY KEY,
   item_key             INT     NOT NULL REFERENCES item,
   validation_item_id   VARCHAR NOT NULL,
