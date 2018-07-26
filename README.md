@@ -16,12 +16,26 @@ The following user accounts will be created:
 ## Create the `imrt` and `test` Databases
 Connect into PostgreSQL using the psql command line tool. You will need to initially connect using the `postgres` user, password is whatever you set it to during the install.
 
-Once you connect, create an administration-level user.  This user will be used to create the `imrt` and `test` databases.  You can set the passwords to whatever you like:
+Once you connect, create an administration-level user.  This user will be used to create the `imrt` and `test` databases.  You can set the passwords to whatever you like.
+
+### Creating the Administration-Level User in Postgres
 
 ```
 $ psql -U postgres
 postgres=# CREATE ROLE "imrt_admin" with LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD '[choose a password]';
 postgres=# \q
+```
+
+### Creating the Administration-Level User in AWS RDS
+In an AWS RDS instance, a `SUPERUSER`-level user cannot be created.  When using an RDS instance, you can:
+
+* Use the "master" account (the account defined while standing up the instance).  This account has sufficient privileges for following the remaining steps
+* Use the following SQL to create a new user account with privileges to create users and databases:
+  * replace `[user account name]` with a meaningful account name
+  * replace `[choose a password]` with a meaningful password
+
+```sql
+CREATE ROLE "[user account name]" with LOGIN CREATEDB CREATEROLE PASSWORD '[choose a password]'
 ```
 
 After creating the administration-level user, log into postgres with that account:
