@@ -9,11 +9,11 @@ CREATE TABLE item_content_update_need (
   notes                           VARCHAR,
   resolution                      VARCHAR,
   resolution_notes                VARCHAR,
-  content_update_need_create_date TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-  internal_resolution_date        TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-  resolution_date                 TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-  created_at                      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-  updated_at                      TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
+  content_update_need_create_date TIMESTAMPTZ,
+  internal_resolution_date        TIMESTAMPTZ,
+  resolution_date                 TIMESTAMPTZ,
+  created_at                      TIMESTAMPTZ,
+  updated_at                      TIMESTAMPTZ,
   updated_by                      VARCHAR NOT NULL
 );
 
