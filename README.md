@@ -192,7 +192,7 @@ SQL files should conform to the following conventions:
 ## Migrations
 
 * Migrations scripts should be added to the directory `src/main/resources/db/migration`
-* Migration scripts should be named according to the flyway naming conventions definted here:
+* Migration scripts should be named according to the flyway naming conventions defined here:
 https://flywaydb.org/documentation/migrations#naming
 * The "Description" component of the file name should end with either '_ddl' (data definition language)
  or '_dml' (data manipulation language), for example `V1_imrt_ddl.sql`
