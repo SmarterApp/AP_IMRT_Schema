@@ -133,7 +133,7 @@ Then run the flyway tasks, for example:
 </pre>
 
 ### Executable Jar
-In addition to using the Gradle plugin, this project creates an executable jar that can be used to run migrations.  You will need to pass in the necessary JDBC url and user credental information.
+In addition to using the Gradle plugin, this project creates an executable jar that can be used to run migrations.  You will need to pass in the necessary JDBC url and user credential information.
 
 To build the executable jar (in the root of the project):
 
@@ -195,7 +195,7 @@ SQL files should conform to the following conventions:
 * Migration scripts should be named according to the flyway naming conventions definted here:
 https://flywaydb.org/documentation/migrations#naming
 * The "Description" component of the file name should end with either '_ddl' (data definition language)
- or '_dml' (data manipulation languge), for example `V1_imrt_ddl.sql`
+ or '_dml' (data manipulation language), for example `V1_imrt_ddl.sql`
 
 
 
