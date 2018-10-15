@@ -1,6 +1,12 @@
 # AP\_IMRT_Schema
 Contains SQL schema migrations to support the IMRT application(s). Uses the [flyway gradle plugin](https://flywaydb.org/documentation/gradle/).
 
+## Linked Applications
+IMRT consists of three main projects with ingest being one of the three.  We recommend looking at the README's in the other project if you do not find what you need here.  The other two projects are:
+
+* [IMRT Ingest](https://github.com/SmarterApp/AP_IMRT_ItemIngestService)
+* [IMRT Search](https://github.com/SmarterApp/AP_IMRT_ItemSearchService)
+
 ## Documentation
 
 * [IMRT Schema Document](docs/imrt_schema_document.md)
