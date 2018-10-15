@@ -1,10 +1,8 @@
 # IMRT Database
 
-[Go Back](README.md)
+[Go Back](../README.md)
 
-IMRT uses Postgres 9.6.  The schema migration files can be found in the [AP\_IMRT\_Schema](https://github.com/SmarterApp/AP_IMRT_Schema) project.  Information concerning how to create the tables can be found in the README in the project.
-
-All tables are in the **imrt** schema.
+IMRT uses Postgres 9.6.  All tables are in the **imrt** schema.
 
 There are three types of tables in the system:
 
