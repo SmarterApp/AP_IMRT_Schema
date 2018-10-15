@@ -3,12 +3,12 @@ Contains SQL schema migrations to support the IMRT application(s). Uses the [fly
 
 ## Documentation
 
-* [IMRT Schema Document](imrt_schema_document.md)
-* [Initial Setup](initial_setup.md)
-* [Run Datbase](migrations.md)
+* [IMRT Schema Document](docs/imrt_schema_document.md)
+* [Initial Setup](docs/initial_setup.md)
+* [Run Datbase](docs/migrations.md)
 
 ## Common Tasks
-* [Create Read-Only Logins](create_read_only_logins.md)
+* [Create Read-Only Logins](docs/create_read_only_logins.md)
 
 ## Developer Notes
 This section covers conventions for adding SQL migrations to the project.
