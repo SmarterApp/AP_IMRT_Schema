@@ -17,9 +17,9 @@ After the databases and users have been created, the Flyway migrations need to b
 * `gradle.properties`:
 
 <pre>
-flyway.user=<user>
-flyway.password=<password>
-flyway.url=<url>
+flyway.user=imrt_admin
+flyway.password=&lt;password>
+flyway.url=&lt;url>
 Sample URL for local database named imrt: jdbc:postgresql://localhost:5432/imrt
 </pre>
 
@@ -41,7 +41,7 @@ gradle build -i
 An example command to run the jar against the `imrt` database: 
 
 ```
- java -jar <location of jar>/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username="<user>" --spring.datasource.password="<password>"
+ java -jar <location of jar>/AP_IMRT_Schema.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/imrt" --spring.datasource.username="imrt_admin" --spring.datasource.password="<password>"
 ```
 
 The above command will need the following provided:
