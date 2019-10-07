@@ -4,20 +4,30 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE'
         classpath 'org.postgresql:postgresql:42.2.1'
+        classpath 'io.github.robwin:jgitflow-gradle-plugin:0.6.0'
     }
 }
 
 plugins {
     id "org.flywaydb.flyway" version "5.0.7"
     id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'maven-publish'
+    id 'com.jfrog.artifactory' version '4.4.14'
 }
+apply plugin: 'io.github.robwin.jgitflow'
 
 repositories {
     mavenLocal()
     mavenCentral()
+
+    maven { url "https://airdev.jfrog.io/airdev/libs-releases/" }
+    maven { url "https://airdev.jfrog.io/airdev/libs-snapshots/" }
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,3 +41,42 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.4.1'
 }
+
+/***************************
+ * maven publishing
+ ***************************/
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    from sourceSets.test.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+artifactory {
+    contextUrl = artifactoryUrl
+
+    publish {
+        repository {
+            repoKey = project.version.toString().contains('-SNAPSHOT') ? artifactorySnapshotPublish : artifactoryReleasePublish
+            username = artifactoryUser
+            password = artifactoryPassword
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+}
+
+tasks.artifactoryPublish.dependsOn build
