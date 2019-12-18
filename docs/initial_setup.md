@@ -51,6 +51,12 @@ postgres=# \q
 ### Create `imrt_ingest` and `imrt_search` Users For the `imrt` Database
 The following SQL can be used to create the `imrt_ingest` and `imrt_search` users in the `imrt` database with the correct permissions:
 
+
+Make sure you are logged in as imrt_admin and are using the imrt database before running the sql commands.
+```
+psql -U imrt_admin imrt
+```
+
 ```sql
 CREATE ROLE imrt_ingest LOGIN PASSWORD '[choose a password]';
 CREATE ROLE imrt_search LOGIN PASSWORD '[choose a password]';
@@ -107,6 +113,11 @@ postgres=# \q
 </pre>
 
 1. Grant the test user a cess  to test database.
+
+Make sure you are logged in as imrt_admin and are using the test database before running the sql commands.
+```
+psql -U imrt_admin test
+```
 
 ```sql
 CREATE USER test WITH PASSWORD '[choose a password]';
