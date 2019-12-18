@@ -10,24 +10,21 @@ IMRT uses [Flyway](https://flywaydb.org/documentation/) for database migrations.
 Both sections are described in this document.  Every IMRT release will tag and release an executable JAR with the tag so that deployers do not need to run Gradle directly.  However, both ways will work and produce the same results.
 
 ## Use Flyway directly leveraging Gradle
-After the databases and users have been created, the Flyway migrations need to be run against the `imrt` and `test` databases.  To create the `imrt` and/or `test` database objects, configure the following properties via one of the following:
+After the databases and users have been created, the Flyway migrations need to be run against the `imrt` and `test` databases.
 
-* environment variables
-* command line arguments
-* `gradle.properties`:
+Local `imrt` Example
 
-<pre>
-flyway.user=imrt_admin
-flyway.password=&lt;password>
-flyway.url=&lt;url>
-Sample URL for local database named imrt: jdbc:postgresql://localhost:5432/imrt
-</pre>
+```
+./gradlew -Pflyway.user=imrt_admin -Pflyway.password=****** -Pflyway.url=jdbc:postgresql://localhost:5432/imrt flywayClean
+./gradlew -Pflyway.user=imrt_admin -Pflyway.password=****** -Pflyway.url=jdbc:postgresql://localhost:5432/imrt flywayMigrate
+```
 
-Then run the flyway tasks, for example:
-<pre>
-./gradlew flywayClean
-./gradlew flywayMigrate
-</pre>
+Local `test` Example
+
+```
+./gradlew -Pflyway.user=test -Pflyway.password=****** -Pflyway.url=jdbc:postgresql://localhost:5432/test flywayClean
+./gradlew -Pflyway.user=test -Pflyway.password=****** -Pflyway.url=jdbc:postgresql://localhost:5432/test flywayMigrate
+```
 
 # Use IMRT Schema Executable Jar
 In addition to using the Gradle plugin, this project creates an executable jar that can be used to run migrations.  You will need to pass in the necessary JDBC url and user credential information.
